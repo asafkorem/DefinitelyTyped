@@ -373,10 +373,13 @@ declare global {
         interface Expect<R> {
             (element: Element): Expect<Promise<void>>;
             /**
-             * Expect the view to be at least 75% visible.
-             * @example await expect(element(by.id('UniqueId204'))).toBeVisible();
+             * Expect the view to be at least N% visible. If no number is provided then defaults to 75%. Negating this
+             * expectation with a `not` expects the view's visible area to be smaller than N%.
+             * @param pct optional integer ranging from 1 to 100, indicating how much percent of the view should be
+             *  visible to the user to be accepted.
+             * @example await expect(element(by.id('UniqueId204'))).toBeVisible(35);
              */
-            toBeVisible(): R;
+            toBeVisible(pct?: number): R;
             /**
              * Negate the expectation.
              * @example await expect(element(by.id('UniqueId205'))).not.toBeVisible();
